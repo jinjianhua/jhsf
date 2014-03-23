@@ -147,7 +147,7 @@ public class TcpServer extends IoHandlerAdapter {
         //DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
         //chain.addLast("logger", new LoggingFilter());
 
-       acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new ServerCodecFactory()));
+        acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new ServerCodecFactory()));
         
         SocketSessionConfig scfg = acceptor.getSessionConfig();
 
