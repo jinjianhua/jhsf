@@ -150,7 +150,7 @@ public class TcpClient extends IoHandlerAdapter {
     	byte[] byte1 = bos.toByteArray();
     	String count = byte1.length+"";
     	byte[] byte2 = count.getBytes();
-    	byte[] byte9 = new byte[9];
+    	byte[] byte9 = new byte[9];//
     	for(int i=0;i<byte2.length;i++){
     		byte9[i] = byte2[i];
     	}
