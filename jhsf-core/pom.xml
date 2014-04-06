@@ -13,8 +13,8 @@
   <dependencies>
   	<dependency>
   		<groupId>hessian</groupId>
-			<artifactId>hessian</artifactId>
-			<version>3.0.13</version> 
+		<artifactId>hessian</artifactId>
+		<version>3.0.13</version> 
   	</dependency>
   </dependencies>
   
