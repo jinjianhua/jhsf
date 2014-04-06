@@ -19,6 +19,8 @@
  */
 package com.jhsf.mina.client;
 
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 
 import org.apache.mina.core.buffer.IoBuffer;
@@ -32,6 +34,7 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
+import com.jhsf.mina.server.Tbean;
 import com.jhsf.mina.server.TcpServer;
 
 /**
@@ -125,37 +128,41 @@ public class TcpClient extends IoHandlerAdapter {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        TcpClient client = new TcpClient();
+		TcpClient client = new TcpClient();
 
-        long t0 = System.currentTimeMillis();
-
-        for (int i = 0; i <= TcpServer.MAX_RECEIVED; i++) {
-            //if (i % 2 == 0) {
-            //Thread.sleep(1);
-            //}
-
-            IoBuffer buffer = IoBuffer.allocate(4);
-            buffer.putInt(i);
-            buffer.flip();
-            WriteFuture future = session.write(buffer);
-
-            while (client.received == false) {
-                Thread.sleep(1);
-            }
-
-            client.received = false;
-
-            if (i % 10000 == 0) {
-                System.out.println("Sent " + i + " messages");
-            }
-        }
-
-        long t1 = System.currentTimeMillis();
-
-        System.out.println("Sent messages delay : " + (t1 - t0));
-
-        Thread.sleep(100000);
-
-        client.connector.dispose(true);
+		for (int i = 0; i < 9; i++) {
+			byte[] bytes = getBytes();
+			IoBuffer buffer = IoBuffer.allocate(bytes.length);
+			buffer.put(bytes);
+			buffer.flip();
+			WriteFuture future = session.write(buffer);
+		}
+		client.connector.dispose(true);
     }
+    
+    
+    public static  byte[]  getBytes() throws Exception{
+    	ByteArrayOutputStream bos = new ByteArrayOutputStream();  
+    	ObjectOutputStream oos = new ObjectOutputStream(bos);       
+    	Tbean  obj = new Tbean();
+    	obj.setName("aaaa");
+    	oos.writeObject(obj);
+    	byte[] byte1 = bos.toByteArray();
+    	String count = byte1.length+"";
+    	byte[] byte2 = count.getBytes();
+    	byte[] byte9 = new byte[9];
+    	for(int i=0;i<byte2.length;i++){
+    		byte9[i] = byte2[i];
+    	}
+    	byte[] tbyte = new byte[9+byte1.length];
+    	for(int i=0;i<9;i++){
+    		tbyte[i] = byte9[i];
+    	}
+    	for(int i=9;i<tbyte.length;i++){
+    		tbyte[i] = byte1[i-9];
+    	}
+    	return tbyte;
+    }
+    
+    
 }
