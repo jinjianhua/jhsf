@@ -10,8 +10,16 @@
   <artifactId>jhsf-core</artifactId>
   <packaging>jar</packaging>
   
+  <dependencies>
+  	<dependency>
+  		<groupId>hessian</groupId>
+			<artifactId>hessian</artifactId>
+			<version>3.0.13</version> 
+  	</dependency>
+  </dependencies>
+  
   <build>
-   	<plugins>
+   	<plugins> 
   		<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
