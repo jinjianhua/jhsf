@@ -13,6 +13,8 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 
+import com.caucho.hessian.io.HessianInput;
+
 public class ServerProtocolDecoder implements ProtocolDecoder{
 	
 	 private final AttributeKey BUFFER = new AttributeKey(getClass(), "buffer");
@@ -67,7 +69,8 @@ public class ServerProtocolDecoder implements ProtocolDecoder{
 	private void t(byte[] bytes) throws IOException, ClassNotFoundException {
 		//print(bytes);
 		InputStream is= new ByteArrayInputStream(bytes);
-		ObjectInputStream ois=new ObjectInputStream(is);
+		HessianInput  ois = new HessianInput(is);
+//		ObjectInputStream ois=new ObjectInputStream(is);
 		Tbean tbean =  (Tbean)ois.readObject();
 		System.out.println(tbean.getName());
 	}

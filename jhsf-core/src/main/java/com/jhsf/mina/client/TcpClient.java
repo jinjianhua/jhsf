@@ -20,6 +20,7 @@
 package com.jhsf.mina.client;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 
@@ -34,6 +35,7 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
+import com.caucho.hessian.io.HessianOutput;
 import com.jhsf.mina.server.Tbean;
 import com.jhsf.mina.server.TcpServer;
 
@@ -129,15 +131,16 @@ public class TcpClient extends IoHandlerAdapter {
      */
     public static void main(String[] args) throws Exception {
 		TcpClient client = new TcpClient();
-
 		for (int i = 0; i < 9; i++) {
-			byte[] bytes = getBytes();
+			byte[] bytes = getBytesByHassian();
 			IoBuffer buffer = IoBuffer.allocate(bytes.length);
 			buffer.put(bytes);
 			buffer.flip();
 			WriteFuture future = session.write(buffer);
 		}
 		client.connector.dispose(true);
+//    	System.out.println(getBytes().length);
+//    	System.out.println(getBytesByHassian().length);
     }
     
     
@@ -164,5 +167,28 @@ public class TcpClient extends IoHandlerAdapter {
     	return tbyte;
     }
     
+    
+    public static byte[] getBytesByHassian() throws IOException{
+    	ByteArrayOutputStream bos = new ByteArrayOutputStream();  
+    	HessianOutput  oos = new HessianOutput(bos);     
+    	Tbean  obj = new Tbean();
+    	obj.setName("aaaa");
+    	oos.writeObject(obj);
+    	byte[] byte1 = bos.toByteArray();
+    	String count = byte1.length+"";
+    	byte[] byte2 = count.getBytes();
+    	byte[] byte9 = new byte[9];//前面9位便是后面数据大小
+    	for(int i=0;i<byte2.length;i++){
+    		byte9[i] = byte2[i];
+    	}
+    	byte[] tbyte = new byte[9+byte1.length];
+    	for(int i=0;i<9;i++){
+    		tbyte[i] = byte9[i];
+    	}
+    	for(int i=9;i<tbyte.length;i++){
+    		tbyte[i] = byte1[i-9];
+    	}
+    	return tbyte;
+    }
     
 }
