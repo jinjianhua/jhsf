@@ -2,7 +2,7 @@ package com.jhsf.mina.server;
 
 import java.io.Serializable;
 
-class Tbean implements Serializable{
+public class Tbean implements Serializable{
 	
 	private static final long serialVersionUID = 1039088580989241301L;
 
