@@ -9,7 +9,7 @@ public class ClientCodecFactory implements ProtocolCodecFactory {
 	
 	private ProtocolEncoder encoder;
 	private ProtocolDecoder decoder;
-
+  
 	public ClientCodecFactory(){
 		encoder = new ClientProtocolEncoder();
 		decoder = new ClientProtocolDecoder();
