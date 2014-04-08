@@ -16,6 +16,12 @@
 		<artifactId>hessian</artifactId>
 		<version>3.0.13</version> 
   	</dependency>
+  	
+  	<dependency>
+  		<groupId>asm</groupId>
+		<artifactId>asm-all</artifactId>
+		<version>3.0</version> 
+  	</dependency>
   </dependencies>
   
   <build>
