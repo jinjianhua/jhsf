@@ -8,7 +8,11 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
-
+/**
+ * 方法访问
+ * @author jinjianhua
+ *
+ */
 public class ClassPrinter implements ClassVisitor {
 
 	@Override
