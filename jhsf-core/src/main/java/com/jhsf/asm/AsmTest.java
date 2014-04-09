@@ -1,7 +1,6 @@
 package com.jhsf.asm;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
