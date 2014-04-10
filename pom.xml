@@ -13,6 +13,8 @@
   
   <modules>
   	<module>jhsf-core</module> 
+  	<module>jhsf-client</module> 
+  	<module>jhsf-server</module> 
   </modules>
   
   <dependencies>
