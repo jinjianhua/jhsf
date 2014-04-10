@@ -1,4 +1,4 @@
-package com.jhsf.asm.traffic;
+package com.jhsf.traffic;
 
 import java.io.Serializable;
 

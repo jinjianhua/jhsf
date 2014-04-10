@@ -1,4 +1,4 @@
-package com.jhsf.asm.traffic;
+package com.jhsf.traffic;
 
 import com.jhsf.mina.client.MinaTrafficClient;
 
