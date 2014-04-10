@@ -1,4 +1,4 @@
-package com.asm.test;
+package com.jhsf.asm;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 
+import com.jhsf.asm.model.ClassByteCodeDO;
 import com.jhsf.asm.model.MethodByteCodeDO;
 /**
  * 方法访问
@@ -17,10 +18,11 @@ import com.jhsf.asm.model.MethodByteCodeDO;
  */
 public class ClassPrinter implements ClassVisitor {
 	
-	private MethodByteCodeDO  methodByteCodeDO;
+	private static ClassByteCodeDO  classByteCodeDO = new ClassByteCodeDO();
 
 	@Override
 	public void visit(int arg0, int arg1, String arg2, String arg3, String arg4, String[] arg5) {
+		System.out.println(arg2+" "+arg3+" "+arg4+" "+arg5);
 	}
 
 	@Override
@@ -37,7 +39,6 @@ public class ClassPrinter implements ClassVisitor {
 
 	@Override
 	public void visitEnd() {
-		System.out.println("}");
 		
 	}
 
@@ -54,8 +55,8 @@ public class ClassPrinter implements ClassVisitor {
 
 	@Override
 	public MethodVisitor visitMethod(int arg0, String arg1, String arg2, String arg3, String[] arg4) {
-		System.out.println(arg0+" "+arg1+" "+arg2+" "+arg3+" "+arg4);
-		methodByteCodeDO = new MethodByteCodeDO(arg1,arg2);
+		MethodByteCodeDO methodByteCodeDO = new MethodByteCodeDO(arg1,arg2);
+		classByteCodeDO.add(methodByteCodeDO);
 		return null;
 	}
 
@@ -71,21 +72,23 @@ public class ClassPrinter implements ClassVisitor {
 		
 	}
 	
-	public MethodByteCodeDO  getMethodByteCodeDO(Class clazz){
+	public static ClassByteCodeDO  getMethodByteCodeDO(Class clazz){
 		try{
+			classByteCodeDO.clear();
 			ClassPrinter classPrinter = new ClassPrinter();
 			ClassReader classReader = new ClassReader(clazz.getName());
 			classReader.accept(classPrinter, 0);
 		}catch(Exception e){
 			
 		}
-		return methodByteCodeDO;
+		return classByteCodeDO;
 	}
 	
 	public static void main(String[] args) throws IOException {
 		ClassPrinter classPrinter = new ClassPrinter();
-		ClassReader classReader = new ClassReader("com.asm.test.HsfServiceImpl");
+		ClassReader classReader = new ClassReader("com.jhsf.asm.HsfService");
 		classReader.accept(classPrinter, 0);
+		System.out.println(22);
 	}
 
 	

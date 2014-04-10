@@ -1,10 +1,12 @@
-package com.jhsf.asm;
+package com.asm.test;
 
 import java.util.ArrayList;
 
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+
+import com.jhsf.asm.classloader.MyClassLoader;
 
 public class AsmTest {
 
@@ -152,7 +154,7 @@ public class AsmTest {
 		  HsfService  s = (HsfService)o;
 		  s.add();
 		  s.update("111");
-		  s.delete(1, "aaa", new ArrayList<String>());
+		  s.delete(11111, "aaa11111", new ArrayList<String>());
 		  System.out.println();
 	}
 	

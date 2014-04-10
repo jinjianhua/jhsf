@@ -132,7 +132,7 @@ public class TcpClient extends IoHandlerAdapter {
     public static void main(String[] args) throws Exception {
 		TcpClient client = new TcpClient();
 		for (int i = 0; i < 9; i++) {
-			byte[] bytes = getBytesByHassian();
+			byte[] bytes = getBytesByHassian(null);
 			IoBuffer buffer = IoBuffer.allocate(bytes.length);
 			buffer.put(bytes);
 			buffer.flip();
@@ -142,6 +142,16 @@ public class TcpClient extends IoHandlerAdapter {
 //    	System.out.println(getBytes().length);
 //    	System.out.println(getBytesByHassian().length);
     }
+    
+    public void send(Object  obj){
+    	byte[] bytes = getBytesByHassian(obj);
+    	IoBuffer buffer = IoBuffer.allocate(bytes.length);
+		buffer.put(bytes);
+		buffer.flip();
+		WriteFuture future = session.write(buffer);
+		this.connector.dispose(true);
+    }
+    
     
     
     public static  byte[]  getBytes() throws Exception{
@@ -168,27 +178,31 @@ public class TcpClient extends IoHandlerAdapter {
     }
     
     
-    public static byte[] getBytesByHassian() throws IOException{
-    	ByteArrayOutputStream bos = new ByteArrayOutputStream();  
-    	HessianOutput  oos = new HessianOutput(bos);     
-    	Tbean  obj = new Tbean();
-    	obj.setName("aaaa");
-    	oos.writeObject(obj);
-    	byte[] byte1 = bos.toByteArray();
-    	String count = byte1.length+"";
-    	byte[] byte2 = count.getBytes();
-    	byte[] byte9 = new byte[9];//前面9位便是后面数据大小
-    	for(int i=0;i<byte2.length;i++){
-    		byte9[i] = byte2[i];
-    	}
-    	byte[] tbyte = new byte[9+byte1.length];
-    	for(int i=0;i<9;i++){
-    		tbyte[i] = byte9[i];
-    	}
-    	for(int i=9;i<tbyte.length;i++){
-    		tbyte[i] = byte1[i-9];
-    	}
-    	return tbyte;
+    public static byte[] getBytesByHassian(Object obj){
+		try {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			HessianOutput oos = new HessianOutput(bos);
+			// Tbean obj = new Tbean();
+			// obj.setName("aaaa");
+			oos.writeObject(obj);
+			byte[] byte1 = bos.toByteArray();
+			String count = byte1.length + "";
+			byte[] byte2 = count.getBytes();
+			byte[] byte9 = new byte[9];// 前面9位便是后面数据大小
+			for (int i = 0; i < byte2.length; i++) {
+				byte9[i] = byte2[i];
+			}
+			byte[] tbyte = new byte[9 + byte1.length];
+			for (int i = 0; i < 9; i++) {
+				tbyte[i] = byte9[i];
+			}
+			for (int i = 9; i < tbyte.length; i++) {
+				tbyte[i] = byte1[i - 9];
+			}
+			return tbyte;
+		} catch (Exception e) {
+			return null;
+		}
     }
     
 }

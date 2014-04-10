@@ -2,9 +2,11 @@ package com.asm.test;
 
 import java.util.List;
 
-public class HsfServiceImpl {
+public class HsfServiceImpl extends BaseService{
+	
+	
 
-	public void add(){
+    public void add(){
 		System.out.println("aaa");
 	}
 	
@@ -12,8 +14,13 @@ public class HsfServiceImpl {
 		System.out.println(str);
 	}
 	
-	public void delete(Integer i ,String s,List<String> strs){
-		System.out.println(i + " "+ s+" "+strs.size());
+	public void delete(Integer arg1 ,String arg2,List<String> arg3){
+		Object[]  params = new Object[7];
+		params[1] = arg1;
+		params[2] = arg2;
+		params[3] = arg3;
+		params[2] = arg2;
+		this.execute(params, "","");
 	}
 	
 }

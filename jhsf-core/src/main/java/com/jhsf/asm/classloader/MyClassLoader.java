@@ -1,4 +1,4 @@
-package com.jhsf.asm;
+package com.jhsf.asm.classloader;
 
 public class MyClassLoader extends ClassLoader {
 	

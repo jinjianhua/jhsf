@@ -1,4 +1,4 @@
-package com.jhsf.asm;
+package com.asm.test;
 
 import java.util.List;
 
@@ -8,6 +8,6 @@ public interface HsfService {
 	
 	public void update(String str);
 	
-	public void delete(Integer i ,String s,List<String>  str);
+	public void delete(Integer arg1 ,String arg2,List<String>  arg3);
 
 }
