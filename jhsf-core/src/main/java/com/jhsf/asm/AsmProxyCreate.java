@@ -98,7 +98,7 @@ public class AsmProxyCreate implements ProxyCreate{
 		  mw.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/Object", "<init>", "()V");
 		  mw.visitInsn(Opcodes.RETURN);
 		  mw.visitMaxs(1, 1);
-		  mw.visitEnd();
+		  mw.visitEnd(); 
 	}
 	
 
