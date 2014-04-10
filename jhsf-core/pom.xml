@@ -11,7 +11,7 @@
   <packaging>jar</packaging>
   
   <dependencies>
-  	<dependency>
+  	<dependency>  
   		<groupId>hessian</groupId>
 		<artifactId>hessian</artifactId>
 		<version>3.0.13</version> 
