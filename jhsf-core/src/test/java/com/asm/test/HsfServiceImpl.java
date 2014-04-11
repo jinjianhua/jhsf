@@ -1,12 +1,14 @@
 package com.asm.test;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.jhsf.asm.model.ParamDO;
 
 public class HsfServiceImpl extends BaseService{
 	
 	
-
-    public void add(){
+	public void add(){
 		System.out.println("aaa");
 	}
 	
@@ -15,12 +17,19 @@ public class HsfServiceImpl extends BaseService{
 	}
 	
 	public void delete(Integer arg1 ,String arg2,List<String> arg3){
-		Object[]  params = new Object[7];
-		params[1] = arg1;
-		params[2] = arg2;
-		params[3] = arg3;
-		params[2] = arg2;
+		ParamDO[]  params = new ParamDO[7];
+		params[1] = new ParamDO();
+		params[2] = new ParamDO();
+		params[3] = new ParamDO();
+		params[2] = new ParamDO();
 		this.execute(params, "","");
+	}
+	
+	public static void main(String[] args) {
+		Integer arg1 = 1;
+		String arg2 = "";
+		List<String> ids = new ArrayList<String>();
+		System.out.println(ids.getClass().getName());
 	}
 	
 }

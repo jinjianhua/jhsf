@@ -13,7 +13,7 @@ public class MethodByteCodeDO {
 	
 	public int getCount(){
 		String[] strs =desc.split(";");
-		return strs.length;
+		return strs.length - 1;
 	}
 	
 	public String getName() {

@@ -22,7 +22,6 @@ public class ClassPrinter implements ClassVisitor {
 
 	@Override
 	public void visit(int arg0, int arg1, String arg2, String arg3, String arg4, String[] arg5) {
-		System.out.println(arg2+" "+arg3+" "+arg4+" "+arg5);
 	}
 
 	@Override
@@ -72,11 +71,12 @@ public class ClassPrinter implements ClassVisitor {
 		
 	}
 	
-	public static ClassByteCodeDO  getMethodByteCodeDO(Class clazz){
+	public static ClassByteCodeDO  getMethodByteCodeDO(String className){
 		try{
 			classByteCodeDO.clear();
 			ClassPrinter classPrinter = new ClassPrinter();
-			ClassReader classReader = new ClassReader(clazz.getName());
+			ClassReader classReader = new ClassReader(className);
+			classByteCodeDO.setName(className);
 			classReader.accept(classPrinter, 0);
 		}catch(Exception e){
 			
@@ -88,7 +88,6 @@ public class ClassPrinter implements ClassVisitor {
 		ClassPrinter classPrinter = new ClassPrinter();
 		ClassReader classReader = new ClassReader("com.jhsf.asm.HsfService");
 		classReader.accept(classPrinter, 0);
-		System.out.println(22);
 	}
 
 	

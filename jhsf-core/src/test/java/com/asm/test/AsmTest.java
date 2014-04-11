@@ -13,7 +13,7 @@ public class AsmTest {
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		 ClassWriter cw = new ClassWriter(0);
 		 cw.visit(Opcodes.V1_1, Opcodes.ACC_PUBLIC, "com/jhsf/asm/HsfServiceImpl", null, "java/lang/Object", 
-				 new String[] { "com/jhsf/asm/HsfService" });
+				 new String[] { "com/asm/test/HsfService" });
 		 
 		 //生成默认的构造方法
 		  MethodVisitor mw = cw.visitMethod(Opcodes.ACC_PUBLIC,
