@@ -8,7 +8,8 @@ public class Test {
 		AsmProxyCreate  proxyCreate = new AsmProxyCreate();
 		Object o =proxyCreate.createImpl("com/jhsf/test/TestService");
 		TestService  testService = (TestService)o;
-		testService.add("aa");
+		//testService.add("aa");
+		testService.update("bb", "ssss");
 	}
 
 }

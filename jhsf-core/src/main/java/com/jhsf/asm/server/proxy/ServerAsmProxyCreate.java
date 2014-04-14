@@ -37,10 +37,11 @@ public class ServerAsmProxyCreate implements ServerProxyCreate{
 		
 		String classDesc = "(L"+trafficDO.getClassName()+";)V";
 		
-		String methodDesc = "L";
+		String methodDesc = "";
 		
 		for(ParamDO  paramDO : trafficDO.getParams()){
-			methodDesc = methodDesc + paramDO.getType()+";";
+			String  p  = "L"+ paramDO.getType()+";";
+			methodDesc = methodDesc + p; 
 		}
 		
 		methodDesc = methodDesc.replaceAll("\\.", "/");
@@ -48,11 +49,13 @@ public class ServerAsmProxyCreate implements ServerProxyCreate{
 		MethodVisitor mw = cw.visitMethod(Opcodes.ACC_PUBLIC, "execute",
 				classDesc, null, null);
 		mw.visitVarInsn(Opcodes.ALOAD, 1);
-		mw.visitLdcInsn("");
+		for(ParamDO  paramDO : trafficDO.getParams()){
+			mw.visitLdcInsn(paramDO.getValue());
+		}
 		mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, trafficDO.getClassName(),
 				trafficDO.getMethod(), "("+methodDesc+")V");//TODO  参数要改
 
-		mw.visitMaxs(2, 2);
+		mw.visitMaxs(20, 20);
 		mw.visitInsn(Opcodes.RETURN);
 		mw.visitEnd();
 		
@@ -63,7 +66,7 @@ public class ServerAsmProxyCreate implements ServerProxyCreate{
 		mw.visitTypeInsn(Opcodes.CHECKCAST, trafficDO.getClassName());
 		mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL, classImplName, "execute",
 				classDesc);
-		mw.visitMaxs(4, 4);
+		mw.visitMaxs(40, 40);
 		mw.visitInsn(Opcodes.RETURN);
 		mw.visitEnd();
 	}

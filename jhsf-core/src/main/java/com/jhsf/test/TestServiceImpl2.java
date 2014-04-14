@@ -7,4 +7,10 @@ public class TestServiceImpl2 implements TestService{
 		System.out.println(22222222222l);
 	}
 
+	@Override
+	public void update(String s, String str) {
+		System.out.println(s+" "+str);
+		
+	}
+
 }

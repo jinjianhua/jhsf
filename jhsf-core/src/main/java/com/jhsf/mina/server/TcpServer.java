@@ -46,7 +46,7 @@ import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
  */
 public class TcpServer extends IoHandlerAdapter {
     /** The listening port (check that it's not already in use) */
-    public static final int PORT = 18567;
+    public static final int PORT = 18568;
 
     /** The number of message to receive */
     public static final int MAX_RECEIVED = 100000;
