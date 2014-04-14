@@ -1,6 +1,6 @@
 package com.asm.test;
 
-public interface Hservice {
+public interface Hservice<T> {
 
-	public void update(Service  service);
+	public void update(T  service);
 }

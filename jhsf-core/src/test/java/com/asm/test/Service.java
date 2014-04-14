@@ -1,9 +1,7 @@
 package com.asm.test;
 
-public class Service {
+public interface Service {
 
-	public void add(String str){
-		System.out.println(11111111111111111l);
-	}
+	public void add(String str);
 	
 }

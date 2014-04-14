@@ -27,7 +27,6 @@ public class AsmTestV3 {
 		  mw.visitMaxs(1, 1);
 		  mw.visitEnd();
 		  
-		  
 		  //TODO
 		  mw = cw.visitMethod(Opcodes.ACC_PUBLIC,
 				    "update",
@@ -45,13 +44,33 @@ public class AsmTestV3 {
 		  mw.visitInsn(Opcodes.RETURN);
 		  mw.visitEnd();
 		  
+		  
+		  mw = cw.visitMethod(Opcodes.ACC_PUBLIC + Opcodes.ACC_VOLATILE + Opcodes.ACC_SYNTHETIC + Opcodes.ACC_BRIDGE,
+				    "update",
+				    "(Ljava/lang/Object;)V",
+				    null,
+				    null);
+		  
+		  mw.visitVarInsn(Opcodes.ALOAD, 0);  
+		  mw.visitVarInsn(Opcodes.ALOAD, 1);  
+		  mw.visitTypeInsn(Opcodes.CHECKCAST,
+				    "com/asm/test/Service");
+		  mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,
+				    "HsfServiceImpl",
+				    "update",
+				    "(Lcom/asm/test/Service;)V");
+		  mw.visitMaxs(4, 4);
+		  mw.visitInsn(Opcodes.RETURN);
+		  mw.visitEnd();
+		  
+		  
 		  byte[] code = cw.toByteArray();
 		  
 		  MyClassLoader loader = new MyClassLoader();
 		  Class<?> exampleClass = loader.defineClass("HsfServiceImpl", code);
 		  Object o = exampleClass.newInstance();
 		  Hservice  s = (Hservice)o;
-		  Service  service = new Service();
+		  Service  service = new ServiceImpl();
 		  s.update(service);
 	}
 	

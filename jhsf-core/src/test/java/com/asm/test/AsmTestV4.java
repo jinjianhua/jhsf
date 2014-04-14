@@ -1,7 +1,5 @@
 package com.asm.test;
 
-import java.util.ArrayList;
-
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -9,7 +7,7 @@ import org.objectweb.asm.Opcodes;
 import com.jhsf.asm.classloader.MyClassLoader;
 import com.jhsf.test.TestService;
 
-public class AsmTestV2 {
+public class AsmTestV4 {
 
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		 ClassWriter cw = new ClassWriter(0);
@@ -39,20 +37,36 @@ public class AsmTestV2 {
 		    null);
 
 		  mw.visitInsn(Opcodes.ICONST_1);
-		  mw.visitTypeInsn(Opcodes.ANEWARRAY, "java/lang/Object");
+		  mw.visitTypeInsn(Opcodes.ANEWARRAY, "com/jhsf/asm/model/ParamDO");
 		  mw.visitVarInsn(Opcodes.ASTORE,2);  
 		  
 		  mw.visitVarInsn(Opcodes.ALOAD,2);  
 		  mw.visitInsn(Opcodes.ICONST_0);  
+		  
+//		  mw.visitVarInsn(Opcodes.ALOAD,1);  
+//		  mw.visitInsn(Opcodes.AASTORE);  
+		  mw.visitTypeInsn(Opcodes.NEW, "com/jhsf/asm/model/ParamDO");
+		  mw.visitInsn(Opcodes.DUP);
 		  mw.visitVarInsn(Opcodes.ALOAD,1);  
-		  mw.visitInsn(Opcodes.AASTORE);  
+		  mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,
+					"java/lang/Object",
+					    "getClass",
+					    "()Ljava/lang/Class;");
+		  
+		  mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,
+					"java/lang/Class",
+					    "getName",
+					    "()Ljava/lang/String;");
+		  mw.visitVarInsn(Opcodes.ALOAD,1); 
+		  mw.visitMethodInsn(Opcodes.INVOKESPECIAL, "com/jhsf/asm/model/ParamDO", "<init>", "(Ljava/lang/String;Ljava/lang/Object;)V");
+		  mw.visitInsn(Opcodes.AASTORE);
 		  
 		  mw.visitVarInsn(Opcodes.ALOAD,0);  
 		  mw.visitVarInsn(Opcodes.ALOAD,2); 
 		  
 		  mw.visitLdcInsn("aa");
-			mw.visitLdcInsn("aa");
-			mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,
+		  mw.visitLdcInsn("aa");
+		  mw.visitMethodInsn(Opcodes.INVOKEVIRTUAL,
 					"TestServiceImpl",
 					    "execute",
 					    "([Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;)V");

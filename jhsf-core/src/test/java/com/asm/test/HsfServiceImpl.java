@@ -17,11 +17,10 @@ public class HsfServiceImpl extends BaseService{
 	}
 	
 	public void delete(Integer arg1 ,String arg2,List<String> arg3){
-		ParamDO[]  params = new ParamDO[7];
-		params[1] = new ParamDO();
-		params[2] = new ParamDO();
-		params[3] = new ParamDO();
-		params[2] = new ParamDO();
+		ParamDO[]  params = new ParamDO[3];
+		params[1] = new ParamDO(arg1.getClass().getName(),arg1);
+		params[2] = new ParamDO(arg2.getClass().getName(),arg2);
+		params[3] = new ParamDO(arg3.getClass().getName(),arg3);
 		this.execute(params, "","");
 	}
 	

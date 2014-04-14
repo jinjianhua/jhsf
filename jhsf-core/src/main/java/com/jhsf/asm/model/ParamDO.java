@@ -6,15 +6,22 @@ public class ParamDO implements Serializable{
 
 	private static final long serialVersionUID = 2474062750248243150L;
 
-	private Type  type;
+	private String  type;
 	
 	private Object value;
+	
+	public ParamDO(){}
 
-	public Type getType() {
+	public ParamDO(String  type,Object value){
+		this.type = type;
+		this.value = value;
+	}
+	
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Type type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

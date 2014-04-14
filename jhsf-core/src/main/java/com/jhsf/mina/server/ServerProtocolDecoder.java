@@ -13,6 +13,7 @@ import org.apache.mina.filter.codec.ProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 
 import com.caucho.hessian.io.HessianInput;
+import com.jhsf.asm.server.ExecuteService;
 import com.jhsf.traffic.TrafficDO;
 //TODO  如果包丢失
 public class ServerProtocolDecoder implements ProtocolDecoder{
@@ -72,7 +73,7 @@ public class ServerProtocolDecoder implements ProtocolDecoder{
 		HessianInput  ois = new HessianInput(is);
 //		ObjectInputStream ois=new ObjectInputStream(is);
 		TrafficDO trafficDO =  (TrafficDO)ois.readObject();
-		System.out.println(trafficDO.getClassName());
+		ExecuteService.execute(trafficDO);
 	}
 
 	private void print(byte[] bytes) {

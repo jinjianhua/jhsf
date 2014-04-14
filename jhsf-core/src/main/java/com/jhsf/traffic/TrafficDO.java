@@ -2,11 +2,13 @@ package com.jhsf.traffic;
 
 import java.io.Serializable;
 
+import com.jhsf.asm.model.ParamDO;
+
 public class TrafficDO implements Serializable{
 
 	private static final long serialVersionUID = 4859994044700175705L;
 	
-	private Object[] params;
+	private ParamDO[] params;
 	
 	private String method;
 	
@@ -14,17 +16,17 @@ public class TrafficDO implements Serializable{
 	
 	public TrafficDO(){}
 	
-	public TrafficDO(Object[] objs,String method,String className){
+	public TrafficDO(ParamDO[] objs,String method,String className){
 		this.className = className;
 		this.params = objs;
 		this.method = method;
 	}
 
-	public Object[] getParams() {
+	public ParamDO[] getParams() {
 		return params;
 	}
 
-	public void setParams(Object[] params) {
+	public void setParams(ParamDO[] params) {
 		this.params = params;
 	}
 
